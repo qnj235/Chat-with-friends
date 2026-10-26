@@ -9,29 +9,28 @@
 *{box-sizing:border-box}
 html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 button{font:inherit;cursor:pointer}
-.logo{font-family:Georgia,"Times New Roman",serif;font-style:italic;font-size:1.7rem;letter-spacing:-.02em;color:var(--rose)}
+.logo{font-family:Georgia,serif;font-style:italic;font-size:1.7rem;letter-spacing:-.02em;color:var(--rose)}
 .wrap{max-width:480px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;background:var(--card);box-shadow:0 0 60px rgba(60,30,100,.08)}
+.wrap.wide{max-width:980px}
 .top{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.2rem;border-bottom:1px solid var(--line)}
-.pad{padding:1.4rem 1.3rem;display:flex;flex-direction:column;gap:1.1rem;flex:1}
-h1,h2{margin:0;font-family:Georgia,serif;font-weight:400;letter-spacing:-.02em}
-h1{font-size:2rem;line-height:1.15}
-.lock{position:relative;border-radius:var(--r);overflow:hidden;height:190px;background:linear-gradient(135deg,#c9b8e8,#f2b7cb 55%,#ffd2b8);display:grid;place-items:center;text-align:center}
-.lock::before{content:"";position:absolute;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.55);filter:blur(18px);top:20px}
-.lock span{position:relative;background:rgba(255,255,255,.85);padding:.4rem .9rem;border-radius:99px;font-size:.9rem;margin-top:110px}
+.pad{padding:1.4rem 1.3rem;display:flex;flex-direction:column;gap:1rem;flex:1}
+h1,h2,h3{margin:0;font-family:Georgia,serif;font-weight:400;letter-spacing:-.02em}h1{font-size:2rem;line-height:1.15}h2{font-size:1.4rem}h3{font-size:1.1rem;margin-top:.6rem}
+.lock{position:relative;border-radius:var(--r);overflow:hidden;height:170px;background:linear-gradient(135deg,#c9b8e8,#f2b7cb 55%,#ffd2b8);display:grid;place-items:center}
+.lock span{background:rgba(255,255,255,.85);padding:.4rem .9rem;border-radius:99px;font-size:.9rem}
 .rules{background:#faf8fd;border:1px solid var(--line);border-radius:var(--r);padding:1rem 1.1rem;margin:0}
 .btn{border:0;border-radius:99px;padding:.9rem 1.4rem;color:#fff;font-weight:600;background:linear-gradient(135deg,var(--rose),var(--amber))}
 .btn:disabled{opacity:.4;cursor:not-allowed}
 .ghost{background:none;border:1px solid var(--line);color:var(--ink);border-radius:99px;padding:.6rem 1.1rem}
-.small{font-size:.82rem;color:var(--mute)}
-a{color:var(--rose)}
-/* chat */
+.danger{border-color:#e08a9f;color:#b3153f}
+.small{font-size:.84rem;color:var(--mute);margin:0}a{color:var(--rose)}
+textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:.6rem;font:inherit}
 .head{display:flex;align-items:center;gap:.7rem;padding:.7rem 1.1rem;border-bottom:1px solid var(--line);position:sticky;top:0;background:#fff;z-index:2}
 .av{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;color:#fff;font-family:Georgia,serif;font-size:1.2rem;flex:none}
-.head b{display:block;line-height:1.2}.head .on{font-size:.78rem;color:#2a9d6a}
+.head b{display:block;line-height:1.2}.on{font-size:.78rem;color:#2a9d6a}
 .dots{margin-left:auto;display:flex;gap:5px}.dots i{width:9px;height:9px;border-radius:50%;background:var(--line)}.dots i.d{background:var(--rose)}
 #log{flex:1;overflow-y:auto;padding:1rem 1.1rem;display:flex;flex-direction:column;gap:.45rem}
-.prof{border:1px solid var(--line);border-radius:var(--r);padding:1rem;margin-bottom:.6rem;background:#faf8fd}
-.prof p{margin:.4rem 0}.tags{display:flex;gap:.4rem;flex-wrap:wrap}.tags span{font-size:.78rem;border:1px solid var(--line);border-radius:99px;padding:.1rem .6rem;background:#fff}
+.prof{border:1px solid var(--line);border-radius:var(--r);padding:1rem;margin-bottom:.6rem;background:#faf8fd}.prof p{margin:.4rem 0}
+.tags{display:flex;gap:.4rem;flex-wrap:wrap}.tags span{font-size:.78rem;border:1px solid var(--line);border-radius:99px;padding:.1rem .6rem;background:#fff}
 .chip{align-self:center;font-size:.78rem;color:var(--mute);margin:.3rem 0;text-align:center}
 .b{max-width:80%;padding:.55rem .9rem;border-radius:18px;word-wrap:break-word;animation:pop .18s ease-out}
 .b.him{align-self:flex-start;background:#f0ecf6;border-bottom-left-radius:5px}
@@ -43,14 +42,13 @@ a{color:var(--rose)}
 #panel{border-top:1px solid var(--line);padding:.8rem 1rem 1rem;display:flex;flex-direction:column;gap:.5rem;background:#fff;min-height:60px}
 .opt{text-align:left;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:.65rem .9rem;color:var(--ink)}
 .opt:hover,.opt:focus-visible{border-color:var(--rose);background:#fff5f8;outline:none}
-.scale{display:flex;flex-wrap:wrap;gap:.3rem}
-.scale button{width:2.3rem;height:2.3rem;border-radius:50%;border:1.5px solid var(--line);background:#fff;color:var(--ink)}
+.q{padding:.7rem 0;border-bottom:1px solid var(--line)}
+.scale{display:flex;gap:.3rem;margin-top:.4rem}
+.scale button{flex:1;max-width:3rem;height:2.4rem;border-radius:12px;border:1.5px solid var(--line);background:#fff;color:var(--ink)}
 .scale button.on{background:var(--rose);border-color:var(--rose);color:#fff}
-.ends{display:flex;justify-content:space-between;font-size:.75rem;color:var(--mute)}
-/* dashboard */
-table{border-collapse:collapse;width:100%;font-size:.85rem}th,td{border-bottom:1px solid var(--line);padding:.4rem .3rem;text-align:left}
-textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:.6rem;font:.8rem monospace}
-.wide{max-width:900px}
+table{border-collapse:collapse;width:100%;font-size:.85rem}th,td{border-bottom:1px solid var(--line);padding:.4rem .4rem;text-align:left;vertical-align:top}th{color:var(--mute);font-weight:600}
+.charts{display:flex;gap:1rem;flex-wrap:wrap}.charts svg{flex:1;min-width:300px;max-width:440px;border:1px solid var(--line);border-radius:12px}
+.scroll{overflow-x:auto}.ok{color:#1f8a5b;font-weight:600}.no{color:#b3153f;font-weight:600}
 </style>
 </head>
 <body>
@@ -58,240 +56,325 @@ textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:.6re
 <script>
 'use strict';
 
-/* Optional: paste a webhook / Apps Script URL here and every finished session is POSTed to it. */
-const ENDPOINT = '';
+/* ===== CONFIG (edit before uploading to GitHub) =====
+   DB_URL: a Firebase Realtime Database URL, e.g. 'https://your-project-default-rtdb.firebaseio.com'
+           (no trailing slash). Leave '' to store data only in each participant's own browser.
+   ADMIN_PASS: optional passcode asked when opening  yourpage.html#results  (soft protection only). */
+const DB_URL = '';
+const ADMIN_PASS = '';
 
-const LV = ['cold', 'neutral', 'interested'];
 const CONV = [
-{ id: 'adrian', name: 'Adrian Cole', age: 22, time: '11:47 PM', grad: 'linear-gradient(135deg,#d6336c,#ff8a5c)',
-  tags: ['Cocky', 'Playful', 'Slow burn'],
-  bio: 'Effortlessly charming, annoyingly observant, and always wearing that half-smile. He rarely texts first.',
-  setting: 'Late night, after you accidentally stole his usual seat at a campus café.',
+{ id: 'alex', name: 'Alex Bennett', grad: 'linear-gradient(135deg,#3b3f5c,#8a7fb0)', tags: ['Cool-headed', 'Independent', 'Selective'],
+  bio: 'Short, composed messages. He has his own life and keeps people at a distance.',
   rounds: [
-  { him: ['So, you stole my seat today.', 'I hope the coffee was worth the crime.'],
-    opts: ["You survived. I'm sure you'll manage tomorrow, too.", "I didn't know it was your seat. There's no name tag on it.", "Wait, you actually noticed me? I thought you were too busy pretending not to look."],
-    res: ["Believe me, if I were pretending to look, you'd know. Anyway, I'll let you off this time. Try not to miss me too much tomorrow."] },
-  { him: ['By the way, you looked exhausted today.', "Don't tell me that coffee was your entire lunch."],
-    opts: ["Didn't know you were keeping track of my meals.", 'I had a busy day. Coffee was just convenient.', 'Aww, were you worried about me?'],
-    res: ["Don't flatter yourself. I just have a thing against people collapsing in public. Very inconvenient for everyone involved."] },
-  { him: ["You know what's strange?", "You're actually pretty entertaining when you're not trying to get rid of me."],
-    opts: ["Good thing I wasn't trying very hard, then.", 'Is that your way of saying you enjoy talking to me?', 'Careful, Adrian. That almost sounded like a compliment.'],
-    res: ["Almost? That's unfortunate. I'll try to disappoint you less next time."] },
-  { him: ["I'm getting coffee tomorrow.", 'There\u2019s a place near campus that makes it properly. Not that overpriced stuff you were drinking today.', 'You can come along if you want.'],
-    opts: ['I think I\u2019ll survive without your coffee recommendations.', 'Maybe. What time are you going?', 'Are you asking me out, or do you just need someone to judge your coffee taste?'],
-    res: ["Let's call it quality control. Ten in the morning. If you show up, I'll assume you have excellent taste in company."] },
-  { him: ['One last thing before I sleep.'],
-    opts: ['What now?', "Yeah? What's up?", "You could've just said goodnight, you know."],
-    res: ["I could have. But then you wouldn't have anything to look forward to tomorrow.", "Ten o'clock. Don't be late.", '...Goodnight.'] }
-  ] },
-{ id: 'ethan', name: 'Ethan Hayes', age: 23, time: '9:16 PM', grad: 'linear-gradient(135deg,#3b4a8f,#7aa2c8)',
-  tags: ['Quiet', 'Observant', 'Hard to read'],
-  bio: 'Sits by the window, listens more than he speaks, and remembers little things you mentioned once and forgot.',
-  setting: 'A rainy evening after a long day at university. You met through a mutual friend a few weeks ago.',
+  { t: '9:24 PM', him: ['Hey. Saw you around campus today.', "Didn't know you had classes this late."],
+    opts: ["You don't exactly keep track of my schedule, do you?", 'Yeah, had a class that ran longer than expected. What about you?', "You noticed me? I didn't think you were paying that much attention."],
+    res: ['Just happened to see you. Nothing interesting about it.'] },
+  { t: 'The next evening, 8:15 PM', him: ['That presentation you mentioned is tomorrow, right?'],
+    opts: ['Surprisingly, you remembered. Yes, it is.', 'Yep, tomorrow morning. Finally getting it over with.', "You remembered! Honestly, I'm a little nervous about it."],
+    res: ["You'll be fine. You've probably prepared enough."] },
+  { t: 'Two days later, 10:06 PM', him: ['Someone told me you were at that café near the library yesterday.', "Didn't know you went there."],
+    opts: ["I didn't realize I needed to report my whereabouts.", "I go there sometimes. It's quiet enough to get work done.", "I do! You could've joined me, you know."],
+    res: ["Maybe. I'm usually busy around that time."] },
+  { t: 'Friday, 7:40 PM', him: ["There's a campus event next week. I might stop by.", "Thought I'd mention it."],
+    opts: ['Okay? Enjoy the event.', 'Oh, nice. I heard about that. Might go, too.', 'Are you telling me because you want to see me there?'],
+    res: ["Go if you want. It's open to everyone."] },
+  { t: 'Sunday, 11:12 PM', him: ['Anyway, hope your week went well.', 'Been a busy few days.'],
+    opts: ['Mine was fine. Hope yours was, too.', 'It was pretty good, actually. Hope you managed to get some rest.', "It would've been better if we'd talked a little more."],
+    res: ["Yeah. Maybe we'll catch up sometime."], end: 'Alex reacted to your message with a \uD83D\uDC4D' } ] },
+{ id: 'noah', name: 'Noah Williams', grad: 'linear-gradient(135deg,#d6336c,#ff8a5c)', tags: ['Self-assured', 'Curious', 'Easygoing'],
+  bio: 'Natural and conversational. He asks questions, remembers details, and says what he means.',
   rounds: [
-  { him: ['You mentioned liking rainy days once.', 'Still true, or was that just your way of sounding interesting?'],
-    opts: ["I didn't realize you were taking notes.", 'Still true. Why do you ask?', "You remembered that? That's surprisingly cute."],
-    res: ["I remember things people say. Doesn't mean they should get too excited about it.", "It's raining pretty hard here. Thought you might appreciate the weather report."] },
-  { him: ["There's something peaceful about the city when it rains.", 'Less noise. Fewer people pretending they\u2019re not tired.'],
-    opts: ["That's a very poetic way of saying the weather is bad.", 'True. Everything feels a little slower when it rains.', 'You always think about things like this, or am I getting the special version of you?'],
-    res: ['Maybe I just think too much.', "It's a terrible habit, actually. Wouldn't recommend it."] },
-  { him: ['Can I ask you something?', 'When you\u2019re having a bad day, do you prefer someone to talk to you or leave you alone?'],
-    opts: ["Depends. Why is that your business?", 'Usually, I like having some time to myself first.', 'Depends on the person. Some people make being around them feel easier.'],
-    res: ['Fair enough. I think people underestimate how different those two things are.', 'Sometimes giving someone space is a way of caring about them, too.'] },
-  { him: ["There's a little bookstore near the river.", 'Old books, terrible lighting, coffee that\u2019s probably a health hazard.', 'I think you\u2019d like it.'],
-    opts: ['Sounds like you\u2019ve already decided what I like.', 'That sounds nice. Do you go there often?', 'Are you telling me about it, or are you trying to take me there?'],
-    res: ['I was getting to that part.', "I'm going there Saturday afternoon. You could come with me.", "No pressure, though. It's a bookstore, not a marriage proposal."] },
-  { him: ['I should probably sleep soon.', 'But there\u2019s something I wanted to say.'],
-    opts: ['This sounds suspiciously serious.', "Go ahead. I'm listening.", "You're making me curious now. Tell me."],
-    res: ["I don't usually reach out to people just because I have nothing better to do.", "So if I text you again tomorrow, don't assume I'm bored.", "Goodnight. And don't stay up too late."] }
-  ] }
+  { t: '8:42 PM', him: ["Hey! It's Noah, from the other day.", "I just walked past that little bookstore you mentioned and remembered you wanted to check it out.", 'Have you been there yet?'],
+    opts: ["Not yet. Haven't really had time.", "Not yet, actually. I've been pretty busy this week.", "Not yet! Wait, you actually remembered that? That's sweet."],
+    res: ["Still on your list, then. It's supposed to be pretty good.", "I've been meaning to check it out myself. Maybe I'll go this weekend."] },
+  { t: 'The next afternoon, 3:18 PM', him: ['Important question.', "When you go to a bookstore, are you the kind of person who knows exactly what they're looking for, or do you wander around for an hour and leave with something completely unrelated?"],
+    opts: ["I don't think that's a particularly important question.", 'Definitely the second one. I usually find something unexpected.', "The second one, obviously. Are you trying to figure out how long I'll make you wait?"],
+    res: ["Good to know. I'll plan accordingly.", "I'm usually pretty bad at sticking to a plan when there's a good book involved, anyway."] },
+  { t: 'Thursday, 6:32 PM', him: ['How did that presentation go, by the way?', 'You mentioned you had one this week. Hope it went well.'],
+    opts: ['It was fine. Thanks.', "It went pretty well, actually. Glad it's over.", 'It went well! I was nervous, but I think I did okay. Thanks for remembering.'],
+    res: ['Glad to hear it. Presentations can be exhausting, even when they go well.', 'At least you can breathe a little now.'] },
+  { t: 'Friday, 7:05 PM', him: ['So, about that bookstore.', "I'm thinking Saturday afternoon. We could look around, grab coffee afterward, and complain about how expensive everything is.", 'Would you be up for that?'],
+    opts: ["I'm not sure. I have a few things to do.", 'That sounds nice. What time were you thinking?', "A bookstore and coffee? You're making this very difficult to turn down."],
+    res: ['I was thinking around three.', "No worries if you're busy, though. We can always find another time."] },
+  { t: 'Saturday, 10:14 AM', him: ['Morning!', 'Just checking whether Saturday is still a possibility for you.', "If not, that's completely fine. I might go anyway and pretend I'm being productive."],
+    opts: ["I don't think I'll make it today. Have fun, though.", 'I can make it! Three still works for me.', "I'm free! And honestly, I've been looking forward to this."],
+    res: ["Sounds good. I'll be there around three.", "And if today doesn't work out, no pressure. We'll figure it out another time.", 'Looking forward to seeing you.'] } ] }
 ];
+const PRE = ['Before this interaction, how interested were you in getting to know this character?',
+ 'Before this interaction, how interested were you in pursuing a romantic relationship with this character?',
+ 'Before this interaction, how motivated were you to make an effort to develop a connection with this character?',
+ 'Before this interaction, how much did you want this character to be interested in you?',
+ 'Before this interaction, how willing were you to invest time and effort in getting to know this character?'];
+const QA = ['I would like to interact with this person again.', 'I would be interested in getting to know this person better.', 'I would make an effort to continue the conversation with this person.', 'I would be willing to initiate another conversation with this person.', 'I would like to explore the possibility of a romantic relationship with this person.', 'I would be motivated to find opportunities to spend more time with this person.', 'I would be willing to put effort into developing a connection with this person.', 'I would feel motivated to pursue this person romantically.'];
+const QB = ['I like this person.', 'I find this person pleasant to interact with.', 'I feel comfortable talking to this person.', 'I have a positive impression of this person.', 'I find this person likable.', 'I enjoy interacting with this person.', 'I feel that I could get along well with this person.', 'I feel positively toward this person.'];
+const QC = ['This person seems genuinely interested in me.', 'This person seems approachable.', 'This person seems emotionally available.', 'This person seems confident.', 'This person seems independent.', 'This person seems difficult to read.', 'This person seems mysterious.', 'This person seems warm and friendly.', 'This person seems to make an effort to get to know me.', 'This person communicates their interest clearly.', 'This person seems selective about whom they spend time with.', 'This person seems emotionally distant.', 'This person seems respectful of my feelings.', 'I can understand where I stand with this person.', 'This person seems like someone who would be a good romantic partner.'];
+const LEG_PRE = '1 = Not at all · 2 = Slightly · 3 = Somewhat · 4 = Moderately · 5 = Quite · 6 = Very · 7 = Extremely';
+const LEG_AG = '1 = Strongly disagree · 7 = Strongly agree';
 
 const app = document.getElementById('app');
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined) e.textContent = text; return e; };
 const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
-const store = {
-  get() { try { return JSON.parse(localStorage.getItem('od_sessions') || '[]'); } catch (e) { return []; } },
-  set(v) { localStorage.setItem('od_sessions', JSON.stringify(v)); }
-};
-let token = 0;   // cancels a running chat if the view changes
+const store = { get() { try { return JSON.parse(localStorage.getItem('od2_sessions') || '[]'); } catch (e) { return []; } }, set(v) { localStorage.setItem('od2_sessions', JSON.stringify(v)); } };
+const api = (m, body) => fetch(DB_URL + '/sessions.json', { method: m, body: body && JSON.stringify(body), signal: AbortSignal.timeout(7000) });
+async function load() {
+  if (!DB_URL) return { list: store.get(), src: 'this browser only (DB_URL is empty)' };
+  const r = await api('GET');
+  if (!r.ok) throw new Error('Server answered ' + r.status);
+  return { list: Object.values((await r.json()) || {}), src: 'shared database' };
+}
+let token = 0, S = null;
+
+function page(inner, cls) {
+  token++; window.scrollTo(0, 0); app.innerHTML = '';
+  const w = el('div', 'wrap ' + (cls || ''));
+  w.innerHTML = `<div class="top"><span class="logo">meetcute</span></div><div class="pad">${inner}</div>`;
+  app.appendChild(w); return w;
+}
 
 /* ---------- start ---------- */
 function showStart() {
-  token++;
-  app.innerHTML = '';
-  const w = el('div', 'wrap');
-  w.innerHTML = `<div class="top"><span class="logo">meetcute</span><span class="small">1 new match</span></div>
-  <div class="pad">
-    <div class="lock"><span>Your match is waiting</span></div>
-    <h1>Someone just messaged you.</h1>
+  const w = page(`<div class="lock"><span>Your match is waiting</span></div><h1>Someone just messaged you.</h1>
     <p class="rules">You will be talking to a person, you have 3 options to choose to answer this person for each round of conversation. The conversation has 5 rounds. After that, we will ask you to rate this person based on the conversation you just had</p>
-    <button class="btn" id="go">Start chatting</button>
-    <button class="ghost" id="share">Share this with a friend</button>
-    <p class="small">The people in this chat are fictional. We record which options you pick and how long each choice takes, nothing else.</p>
-    <p class="small"><a href="#results">Researcher view</a></p>
-  </div>`;
-  app.appendChild(w);
-  w.querySelector('#go').onclick = begin;
+    <button class="btn" id="go">Start chatting</button><button class="ghost" id="share">Share this with a friend</button>
+    <p class="small">Anonymous. We record your answers and how long each choice takes, never your name. The people in this chat are fictional.</p>`);
+  w.querySelector('#go').onclick = async e => { e.target.disabled = true; e.target.textContent = 'Finding your match…'; begin(await assign()); };
   w.querySelector('#share').onclick = share;
 }
 async function share() {
   const url = location.href.split('#')[0];
-  if (navigator.share) { await navigator.share({ title: 'meetcute', text: 'Try this short chat and rate your match.', url }); return; }
-  await navigator.clipboard.writeText(url);
-  alert('Link copied:\n' + url);
+  if (navigator.share) { await navigator.share({ title: 'meetcute', text: 'Try this short chat study.', url }); return; }
+  await navigator.clipboard.writeText(url); alert('Link copied:\n' + url);
+}
+/* balanced random assignment to the 2 (character) x 2 (commitment) cells */
+async function assign() {
+  let list = [];
+  try { list = (await load()).list; } catch (e) { console.warn('Assignment fell back to pure random:', e); }
+  const n = [[0, 0], [0, 0]];
+  list.forEach(s => n[s.char === 'noah' ? 1 : 0][s.commit]++);
+  const cells = [[0, 0], [0, 1], [1, 0], [1, 1]], min = Math.min(...cells.map(([a, b]) => n[a][b]));
+  const pool = cells.filter(([a, b]) => n[a][b] === min);
+  const [ch, cm] = pool[Math.floor(Math.random() * pool.length)];
+  return { ch, cm };
+}
+
+/* ---------- role card, pre-questions ---------- */
+function begin({ ch, cm }) {
+  const c = CONV[ch], first = c.name.split(' ')[0];
+  S = { id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6), ts: new Date().toISOString(), t0: Date.now(), char: c.id, commit: cm, why: '', pre: [], choices: [], times: [], A: [], B: [], C: [] };
+  const story = cm
+    ? (c.id === 'alex'
+      ? `You met <b>${c.name}</b> at a university event a month ago. Since then you have talked several times, and you have started noticing him more than you'd like to admit. Out of several profiles, you chose his.`
+      : `You met <b>${c.name}</b> through a mutual friend a few weeks ago. You got along well, and you have had a crush on him since. Out of several profiles, you chose his.`)
+    : `The app randomly paired you with <b>${c.name}</b>. You don't really know him and you have no particular feelings about him either way.`;
+  const w = page(`<h2>Your match</h2><div class="prof"><b>${c.name}</b><p>${c.bio}</p><div class="tags">${c.tags.map(t => `<span>${t}</span>`).join('')}</div></div>
+    <p>${story}</p>
+    ${cm ? `<label for="why"><b>In a sentence or two: what makes ${first} stand out to you?</b></label><textarea id="why" rows="3"></textarea>` : ''}
+    <button class="btn" id="nx" ${cm ? 'disabled' : ''}>Continue</button>`);
+  const why = w.querySelector('#why'), nx = w.querySelector('#nx');
+  if (why) why.oninput = () => { nx.disabled = why.value.trim().length < 10; };
+  nx.onclick = () => {
+    if (why) S.why = why.value.trim();
+    scalePage({ title: 'Before you start', intro: `Think about how you feel about ${first} right now.`, legend: LEG_PRE, items: PRE }, a => { S.pre = a; chat(c); });
+  };
+}
+function scalePage(o, done) {
+  const w = page(`<h2>${o.title}</h2><p class="small">${o.intro}</p><p class="small"><b>${o.legend}</b></p><div id="qs"></div><button class="btn" id="nx" disabled>Next</button>`);
+  const ans = Array(o.items.length).fill(0), qs = w.querySelector('#qs'), nx = w.querySelector('#nx');
+  o.items.forEach((t, i) => {
+    const q = el('div', 'q'); q.appendChild(el('div', '', (i + 1) + '. ' + t));
+    const sc = el('div', 'scale');
+    for (let n = 1; n <= 7; n++) {
+      const b = el('button', '', n); b.setAttribute('aria-label', `${n} of 7`);
+      b.onclick = () => { ans[i] = n; [...sc.children].forEach(x => x.classList.toggle('on', x === b)); nx.disabled = ans.some(a => !a); };
+      sc.appendChild(b);
+    }
+    q.appendChild(sc); qs.appendChild(q);
+  });
+  nx.onclick = () => done(ans);
 }
 
 /* ---------- chat ---------- */
-async function begin() {
-  const seen = store.get().map(s => s.char);
-  let pool = CONV.filter(c => !seen.includes(c.id));
-  if (!pool.length) pool = CONV;
-  const c = pool[Math.floor(Math.random() * pool.length)];
-  const S = { id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6), char: c.id, ts: new Date().toISOString(), choices: [], times: [] };
-  const my = ++token;
-  app.innerHTML = '';
-  const w = el('div', 'wrap');
-  w.style.height = '100vh';
-  w.innerHTML = `<div class="head"><div class="av" style="background:${c.grad}">${c.name[0]}</div>
-    <div><b>${c.name}, ${c.age}</b><span class="on">online</span></div><div class="dots"></div></div>
-    <div id="log"></div><div id="panel"></div>`;
+async function chat(c) {
+  token++; const my = token; window.scrollTo(0, 0); app.innerHTML = '';
+  const w = el('div', 'wrap'); w.style.height = '100vh';
+  w.innerHTML = `<div class="head"><div class="av" style="background:${c.grad}">${c.name[0]}</div><div><b>${c.name}</b><span class="on">online</span></div><div class="dots"></div></div><div id="log"></div><div id="panel"></div>`;
   app.appendChild(w);
   const log = w.querySelector('#log'), panel = w.querySelector('#panel'), dots = w.querySelector('.dots');
   for (let i = 0; i < 5; i++) dots.appendChild(el('i'));
-  const prof = el('div', 'prof');
-  prof.innerHTML = `<b>${c.name}</b> <span class="small">${c.age}</span><p>${c.bio}</p><div class="tags">${c.tags.map(t => `<span>${t}</span>`).join('')}</div><p class="small"><i>${c.setting}</i></p>`;
-  log.appendChild(prof);
-  log.appendChild(el('div', 'chip', 'Today ' + c.time));
   const down = () => { log.scrollTop = log.scrollHeight; };
   const bubble = (t, who) => { log.appendChild(el('div', 'b ' + who, t)); down(); };
   const say = async lines => {
     for (const t of lines) {
       const ty = el('div', 'typ'); ty.innerHTML = '<i></i><i></i><i></i>'; log.appendChild(ty); down();
-      await sleep(550 + Math.min(t.length * 16, 900));
-      ty.remove();
+      await sleep(550 + Math.min(t.length * 16, 900)); ty.remove();
       if (my !== token) return false;
-      bubble(t, 'him');
-      await sleep(250);
+      bubble(t, 'him'); await sleep(250);
     }
     return true;
   };
-  const ask = (round) => new Promise(res => {
-    panel.innerHTML = '';
-    const t0 = performance.now();
+  const ask = round => new Promise(res => {
+    panel.innerHTML = ''; const t0 = performance.now();
     shuffle([0, 1, 2]).forEach(lv => {
       const b = el('button', 'opt', round.opts[lv]);
-      b.onclick = () => {
-        const ms = Math.round(performance.now() - t0);
-        S.choices.push(lv); S.times.push(ms);
-        panel.innerHTML = '';
-        bubble(round.opts[lv], 'me');
-        res();
-      };
+      b.onclick = () => { S.choices.push(lv); S.times.push(Math.round(performance.now() - t0)); panel.innerHTML = ''; bubble(round.opts[lv], 'me'); res(); };
       panel.appendChild(b);
     });
   });
-
   for (let r = 0; r < 5; r++) {
     [...dots.children].forEach((d, i) => d.className = i <= r ? 'd' : '');
-    if (!await say(c.rounds[r].him)) return;
-    await ask(c.rounds[r]);
-    await sleep(500);
-    if (!await say(c.rounds[r].res)) return;
+    const R = c.rounds[r];
+    log.appendChild(el('div', 'chip', R.t));
+    if (!await say(R.him)) return;
+    await ask(R); await sleep(500);
+    if (!await say(R.res)) return;
+    if (R.end) log.appendChild(el('div', 'chip', R.end));
     await sleep(400);
   }
-  log.appendChild(el('div', 'chip', 'The chat has finished.'));
-  down();
-  rate(panel, c, S);
+  log.appendChild(el('div', 'chip', 'The chat has finished.')); down();
+  const b = el('button', 'btn', 'Continue to the questions'); panel.appendChild(b);
+  b.onclick = () => survey();
 }
 
-/* ---------- rating ---------- */
-function rate(panel, c, S) {
-  panel.innerHTML = '';
-  const first = c.name.split(' ')[0];
-  const val = {};
-  const sub = el('button', 'btn', 'Submit'); sub.disabled = true;
-  const row = (key, q) => {
-    const box = el('div'); box.appendChild(el('b', '', q));
-    const sc = el('div', 'scale');
-    for (let n = 1; n <= 10; n++) {
-      const b = el('button', '', n);
-      b.onclick = () => { val[key] = n; [...sc.children].forEach(x => x.classList.toggle('on', x === b)); sub.disabled = !(val.talkAgain && val.nice); };
-      sc.appendChild(b);
-    }
-    const ends = el('div', 'ends'); ends.append(el('span', '', '1 not at all'), el('span', '', '10 definitely'));
-    box.append(sc, ends); panel.appendChild(box);
-  };
-  panel.appendChild(el('b', '', 'The chat is finished. Please rate ' + first + ' from 1 to 10.'));
-  row('talkAgain', `How much would you like to talk to ${first} again?`);
-  row('nice', `How likely is ${first} to be a nice person?`);
-  panel.appendChild(sub);
-  panel.style.maxHeight = '60vh'; panel.style.overflowY = 'auto';
-  sub.onclick = () => {
-    S.talkAgain = val.talkAgain; S.nice = val.nice;
-    const all = store.get(); all.push(S); store.set(all);
-    if (ENDPOINT) fetch(ENDPOINT, { method: 'POST', mode: 'no-cors', body: JSON.stringify(S) });
-    thanks(S);
-  };
+/* ---------- post-chat survey ---------- */
+function survey() {
+  const a = { intro: 'Please answer based on the conversation you just had.', legend: LEG_AG };
+  scalePage({ ...a, title: 'Part 1 of 3', items: QA }, A => { S.A = A;
+    scalePage({ ...a, title: 'Part 2 of 3', items: QB }, B => { S.B = B;
+      scalePage({ ...a, title: 'Part 3 of 3: your impressions', items: QC }, C => { S.C = C; submit(); }); }); });
 }
-
-function thanks(S) {
-  token++;
-  app.innerHTML = '';
-  const w = el('div', 'wrap');
-  const code = 'OD1:' + btoa(JSON.stringify(S));
-  w.innerHTML = `<div class="top"><span class="logo">meetcute</span></div>
-  <div class="pad"><h1>Thank you for participating.</h1>
-  <p>Your answers have been recorded. Know someone who would like to try it? Send them the link.</p>
-  <button class="btn" id="share">Share this with a friend</button>
-  <button class="ghost" id="copy">Copy my result code</button>
-  <p class="small">If this page is not connected to a server, the result code is how you send your answers to whoever shared it with you.</p>
-  <button class="ghost" id="again">Start over</button></div>`;
-  app.appendChild(w);
+async function submit() {
+  S.dur = Math.round((Date.now() - S.t0) / 1000); delete S.t0;
+  const all = store.get(); all.push(S); store.set(all);
+  let ok = !DB_URL, err = '';
+  if (DB_URL) { try { const r = await api('POST', S); ok = r.ok; if (!ok) err = 'Server answered ' + r.status; } catch (e) { err = e.message; } }
+  const code = 'OD2:' + btoa(unescape(encodeURIComponent(JSON.stringify(S))));
+  const w = page(`<h1>Thank you for participating.</h1>
+    <p>This was a short study of how a person's texting style affects how much others like them and want to talk to them. The two characters and their messages were fictional and scripted.</p>
+    ${ok ? '' : `<p class="small" style="color:#b3153f">Your answers could not be sent (${err}). Please copy your result code and send it to the person who shared this link.</p><button class="ghost" id="copy">Copy my result code</button>`}
+    <button class="btn" id="share">Share this with a friend</button>`);
   w.querySelector('#share').onclick = share;
-  w.querySelector('#copy').onclick = async () => { await navigator.clipboard.writeText(code); w.querySelector('#copy').textContent = 'Copied'; };
-  w.querySelector('#again').onclick = showStart;
+  const cp = w.querySelector('#copy'); if (cp) cp.onclick = async () => { await navigator.clipboard.writeText(code); cp.textContent = 'Copied'; };
 }
 
-/* ---------- researcher view (#results) ---------- */
-const avg = a => a.length ? (a.reduce((x, y) => x + y, 0) / a.length) : NaN;
-const f = (n, d = 1) => isNaN(n) ? '-' : n.toFixed(d);
-function dash() {
-  token++;
-  const all = store.get();
-  app.innerHTML = '';
-  const w = el('div', 'wrap wide');
-  let html = `<div class="top"><span class="logo">meetcute · results</span><a href="#">Back</a></div><div class="pad">
-  <p class="small">${all.length} session(s) stored in this browser. Paste result codes from participants below to add them.</p>`;
-  CONV.forEach(c => {
-    const L = all.filter(s => s.char === c.id);
-    const cnt = [0, 1, 2].map(l => L.reduce((n, s) => n + s.choices.filter(x => x === l).length, 0));
-    const tot = cnt[0] + cnt[1] + cnt[2];
-    const rt = [0, 1, 2, 3, 4].map(r => f(avg(L.map(s => s.times[r] / 1000).filter(x => x === x)), 1));
-    html += `<h2>${c.name}</h2><table><tr><th>Sessions</th><th>Cold</th><th>Neutral</th><th>Interested</th><th>Mean warmth (0-2)</th><th>Talk again</th><th>Nice</th></tr>
-    <tr><td>${L.length}</td>${cnt.map(n => `<td>${n} (${tot ? Math.round(100 * n / tot) : 0}%)</td>`).join('')}
-    <td>${f(tot ? (cnt[1] + 2 * cnt[2]) / tot : NaN, 2)}</td><td>${f(avg(L.map(s => s.talkAgain)))}</td><td>${f(avg(L.map(s => s.nice)))}</td></tr></table>
-    <p class="small">Mean seconds to choose, rounds 1-5: ${rt.join(' / ')}</p>`;
-  });
-  html += `<textarea id="paste" rows="3" placeholder="Paste result codes (one per line)"></textarea>
-  <div style="display:flex;gap:.5rem;flex-wrap:wrap"><button class="btn" id="imp">Add codes</button><button class="ghost" id="csv">Download CSV</button><button class="ghost" id="clr">Clear all</button></div></div>`;
-  w.innerHTML = html; app.appendChild(w);
-  w.querySelector('#imp').onclick = () => {
-    const have = new Set(all.map(s => s.id));
-    w.querySelector('#paste').value.split('\n').map(x => x.trim()).filter(x => x.startsWith('OD1:')).forEach(x => {
-      const s = JSON.parse(atob(x.slice(4)));
-      if (!have.has(s.id)) { all.push(s); have.add(s.id); }
+/* ================= RESEARCHER VIEW (#results) ================= */
+const mean = a => a.reduce((x, y) => x + y, 0) / a.length;
+const sd = a => { if (a.length < 2) return NaN; const m = mean(a); return Math.sqrt(a.reduce((s, x) => s + (x - m) ** 2, 0) / (a.length - 1)); };
+const f = (n, d = 2) => (n === undefined || n !== n) ? '–' : n.toFixed(d);
+const P = p => p !== p ? '–' : p < .001 ? '< .001' : '= ' + p.toFixed(3).replace(/^0/, '');
+function lg(x) { const c = [76.18009172947146, -86.50532032941677, 24.01409824083091, -1.231739572450155, .1208650973866179e-2, -.5395239384953e-5]; let y = x, t = x + 5.5; t -= (x + .5) * Math.log(t); let s = 1.000000000190015; for (const k of c) s += k / ++y; return -t + Math.log(2.5066282746310005 * s / x); }
+function betacf(x, a, b) {
+  const qab = a + b, qap = a + 1, qam = a - 1, T = 1e-30; let c = 1, d = 1 - qab * x / qap; if (Math.abs(d) < T) d = T; d = 1 / d; let h = d;
+  for (let m = 1; m <= 200; m++) {
+    const m2 = 2 * m; let aa = m * (b - m) * x / ((qam + m2) * (a + m2));
+    d = 1 + aa * d; if (Math.abs(d) < T) d = T; c = 1 + aa / c; if (Math.abs(c) < T) c = T; d = 1 / d; h *= d * c;
+    aa = -(a + m) * (qab + m) * x / ((a + m2) * (qap + m2));
+    d = 1 + aa * d; if (Math.abs(d) < T) d = T; c = 1 + aa / c; if (Math.abs(c) < T) c = T; d = 1 / d; const del = d * c; h *= del;
+    if (Math.abs(del - 1) < 3e-7) break;
+  } return h;
+}
+function betai(x, a, b) { if (x <= 0) return 0; if (x >= 1) return 1; const bt = Math.exp(lg(a + b) - lg(a) - lg(b) + a * Math.log(x) + b * Math.log(1 - x)); return x < (a + 1) / (a + b + 2) ? bt * betacf(x, a, b) / a : 1 - bt * betacf(1 - x, b, a) / b; }
+const pT = (t, df) => betai(df / (df + t * t), df / 2, .5);
+function welch(a, b) {
+  if (a.length < 2 || b.length < 2) return null;
+  const va = sd(a) ** 2, vb = sd(b) ** 2, na = a.length, nb = b.length, se2 = va / na + vb / nb;
+  const t = (mean(a) - mean(b)) / Math.sqrt(se2), df = se2 ** 2 / ((va / na) ** 2 / (na - 1) + (vb / nb) ** 2 / (nb - 1));
+  const sp = Math.sqrt(((na - 1) * va + (nb - 1) * vb) / (na + nb - 2));
+  return { t, df, p: pT(t, df), d: (mean(a) - mean(b)) / sp };
+}
+/* 2x2 between-subjects interaction: cells[strategy][commitment] = array of scores */
+function inter(cells) {
+  if (cells.flat().some(a => a.length < 2)) return null;
+  let sse = 0, N = 0; cells.flat().forEach(a => { const m = mean(a); sse += a.reduce((s, x) => s + (x - m) ** 2, 0); N += a.length; });
+  const dfe = N - 4, m = cells.map(r => r.map(mean)), n = cells.map(r => r.map(a => a.length));
+  const con = m[0][0] - m[0][1] - m[1][0] + m[1][1], v = (sse / dfe) * (1 / n[0][0] + 1 / n[0][1] + 1 / n[1][0] + 1 / n[1][1]);
+  const F = con * con / v; return { F, dfe, p: betai(dfe / (dfe + F), dfe / 2, .5) };
+}
+function pearson(x, y) { if (x.length < 4) return null; const mx = mean(x), my = mean(y); let sxy = 0, sxx = 0, syy = 0; x.forEach((v, i) => { sxy += (v - mx) * (y[i] - my); sxx += (v - mx) ** 2; syy += (y[i] - my) ** 2; }); const r = sxy / Math.sqrt(sxx * syy); return { r, n: x.length, p: pT(r * Math.sqrt((x.length - 2) / (1 - r * r)), x.length - 2) }; }
+function alpha(rows) { if (rows.length < 3) return NaN; const k = rows[0].length; let sv = 0; for (let i = 0; i < k; i++) sv += sd(rows.map(r => r[i])) ** 2; return k / (k - 1) * (1 - sv / sd(rows.map(r => r.reduce((x, y) => x + y, 0))) ** 2); }
+const ST = ['Hard to get', 'Easy to get'], CM = ['No commitment', 'Commitment'];
+const stOf = s => s.char === 'noah' ? 1 : 0;
+const cellsOf = (L, fn) => [0, 1].map(st => [0, 1].map(cm => L.filter(s => stOf(s) === st && s.commit === cm).map(fn)));
+const tt = r => r ? `t(${f(r.df, 1)}) = ${f(r.t)}, p ${P(r.p)}, d = ${f(r.d)}` : '–';
+const ff = r => r ? `F(1, ${r.dfe}) = ${f(r.F)}, p ${P(r.p)}` : '–';
+
+function chart(title, cells) {
+  const W = 400, H = 260, L = 34, T = 28, B = 56, pw = W - L - 8, ph = H - T - B, y = v => T + ph * (1 - (v - 1) / 6), col = ['#5b4b8a', '#d6336c'];
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${title}"><text x="${L}" y="17" font-size="13" font-weight="600" fill="#241a35">${title}</text>`;
+  for (let v = 1; v <= 7; v++) s += `<line x1="${L}" x2="${W - 8}" y1="${y(v)}" y2="${y(v)}" stroke="#e3dcee"/><text x="${L - 6}" y="${y(v) + 4}" font-size="10" text-anchor="end" fill="#7b7190">${v}</text>`;
+  [0, 1].forEach(cm => {
+    const gx = L + cm * pw / 2, bw = pw / 6;
+    s += `<text x="${gx + pw / 4}" y="${H - 32}" font-size="11" text-anchor="middle" fill="#241a35">${CM[cm]}</text>`;
+    [0, 1].forEach(st => {
+      const a = cells[st][cm]; if (!a.length) return;
+      const m = mean(a), se = a.length > 1 ? sd(a) / Math.sqrt(a.length) : 0, x = gx + pw / 4 - bw + st * bw + bw * .05, w = bw * .9, cx = x + w / 2;
+      s += `<rect x="${x}" y="${y(m)}" width="${w}" height="${y(1) - y(m)}" fill="${col[st]}" rx="3"/>`;
+      s += `<line x1="${cx}" x2="${cx}" y1="${y(Math.max(1, m - se))}" y2="${y(Math.min(7, m + se))}" stroke="#241a35"/><text x="${cx}" y="${y(Math.min(7, m + se)) - 4}" font-size="10" text-anchor="middle" fill="#241a35">${f(m)}</text>`;
     });
-    store.set(all); dash();
+  });
+  [0, 1].forEach(st => s += `<rect x="${L + st * 120}" y="${H - 16}" width="10" height="10" fill="${col[st]}" rx="2"/><text x="${L + st * 120 + 15}" y="${H - 7}" font-size="11" fill="#241a35">${ST[st]}</text>`);
+  return s + '<text x="' + (W - 8) + '" y="' + (H - 7) + '" font-size="9" text-anchor="end" fill="#7b7190">mean ± SE</text></svg>';
+}
+
+async function dash() {
+  if (ADMIN_PASS && sessionStorage.getItem('od_ok') !== '1') { if (prompt('Passcode') !== ADMIN_PASS) { location.hash = ''; return; } sessionStorage.setItem('od_ok', '1'); }
+  token++; app.innerHTML = '';
+  const w = el('div', 'wrap wide'); w.innerHTML = '<div class="top"><span class="logo">meetcute · results</span><a href="#">Back</a></div><div class="pad" id="d"><p>Loading…</p></div>'; app.appendChild(w);
+  const d = w.querySelector('#d');
+  let data; try { data = await load(); } catch (e) { d.innerHTML = `<p style="color:#b3153f">Could not load from the database: ${e.message}</p><p class="small">Check DB_URL and your database rules.</p>`; return; }
+  const L = data.list.filter(s => s.A && s.A.length === 8);
+  L.forEach(s => { s.want = mean(s.A); s.like = mean(s.B); s.preM = mean(s.pre); });
+  const z = k => { const v = L.map(s => s[k]), m = mean(v), q = sd(v); return s => (s[k] - m) / q; };
+  if (L.length > 2) { const zw = z('want'), zl = z('like'); L.forEach(s => s.diff = zw(s) - zl(s)); }
+  const LK = cellsOf(L, s => s.like), WN = cellsOf(L, s => s.want), DF = cellsOf(L, s => s.diff);
+  const cell = c => c.length ? `${f(mean(c))} (${f(sd(c))})` : '–';
+  let h = `<p class="small">${L.length} completed session(s) · source: ${data.src}</p>
+  <div style="display:flex;gap:.5rem;flex-wrap:wrap"><button class="ghost" id="rf">Refresh</button><button class="ghost" id="csv">Download CSV</button><button class="ghost danger" id="rs">Reset all data</button></div>
+  <h3>Design: participants per cell</h3><table><tr><th></th>${CM.map(c => `<th>${c}</th>`).join('')}</tr>${ST.map((s, i) => `<tr><td>${s} (${i ? 'Noah' : 'Alex'})</td>${[0, 1].map(c => `<td>${LK[i][c].length}</td>`).join('')}</tr>`).join('')}</table>`;
+  const pre = [0, 1].map(c => L.filter(s => s.commit === c).map(s => s.preM));
+  h += `<h3>Manipulation check: interest before the chat (1-7)</h3><p class="small">No commitment M (SD) = ${cell(pre[0])}; Commitment M (SD) = ${cell(pre[1])}; ${tt(welch(pre[1], pre[0]))} · α(pre) = ${f(alpha(L.map(s => s.pre)))}</p>`;
+  h += `<h3>Table 1. Means (SD) of affective (liking) and motivational (wanting) evaluations</h3><div class="scroll"><table><tr><th rowspan="2">Strategy</th><th colspan="2">Liking (Part 2)</th><th colspan="2">Wanting (Part 1)</th></tr><tr><th>${CM[0]}</th><th>${CM[1]}</th><th>${CM[0]}</th><th>${CM[1]}</th></tr>
+  ${[0, 1].map(st => `<tr><td>${ST[st]}</td>${[0, 1].map(c => `<td>${cell(LK[st][c])}</td>`).join('')}${[0, 1].map(c => `<td>${cell(WN[st][c])}</td>`).join('')}</tr>`).join('')}</table></div>
+  <p class="small">α(wanting) = ${f(alpha(L.map(s => s.A)))} · α(liking) = ${f(alpha(L.map(s => s.B)))}</p>`;
+  h += `<h3>Figure. Liking and wanting by strategy and commitment</h3><div class="charts">${chart('Liking (affective), 1-7', LK)}${chart('Wanting (motivational), 1-7', WN)}</div>`;
+  const row = (lbl, a, b) => `<tr><td>${lbl}</td><td>${a}</td><td>${b}</td></tr>`;
+  h += `<h3>Inferential tests</h3><div class="scroll"><table><tr><th>Effect</th><th>Liking</th><th>Wanting</th></tr>
+  ${[0, 1].map(c => row(`Hard vs. easy to get, ${CM[c].toLowerCase()}`, tt(welch(LK[0][c], LK[1][c])), tt(welch(WN[0][c], WN[1][c])))).join('')}
+  ${row('Strategy × Commitment', ff(inter(LK)), ff(inter(WN)))}</table></div>
+  <p class="small">Evaluation type × Strategy × Commitment (z-scored wanting minus z-scored liking): ${ff(inter(DF))}. Simple effects are hard minus easy.</p>`;
+  const rs = [0, 1].map(c => pearson(L.filter(s => s.commit === c).map(s => s.like), L.filter(s => s.commit === c).map(s => s.want)));
+  let zc = '–'; if (rs[0] && rs[1] && rs[0].n > 3 && rs[1].n > 3) { const zz = (Math.atanh(rs[0].r) - Math.atanh(rs[1].r)) / Math.sqrt(1 / (rs[0].n - 3) + 1 / (rs[1].n - 3)); zc = `Z = ${f(zz)}, p ${P(pT(zz, 1e5))}`; }
+  h += `<h3>Correlation between liking and wanting</h3><p class="small">${CM.map((c, i) => `${c}: ${rs[i] ? `r = ${f(rs[i].r)}, p ${P(rs[i].p)}, n = ${rs[i].n}` : '–'}`).join(' · ')} · difference: ${zc}</p>`;
+  const mm = (c, st, cm) => c[st][cm].length ? mean(c[st][cm]) : NaN, chk = (ok, t) => `<li class="${ok ? 'ok' : 'no'}">${ok ? '✓' : '✗'} ${t}</li>`;
+  h += `<h3>Do the data match the paper's predictions?</h3><ul>
+  ${chk(mm(LK, 1, 0) > mm(LK, 0, 0) && mm(LK, 1, 1) > mm(LK, 0, 1), 'Liking: easy to get beats hard to get at both commitment levels')}
+  ${chk(mm(WN, 1, 0) > mm(WN, 0, 0), 'Wanting, no commitment: easy to get beats hard to get')}
+  ${chk(mm(WN, 0, 1) > mm(WN, 1, 1), 'Wanting, commitment: hard to get beats easy to get (the reversal)')}</ul>`;
+  const H_ = L.filter(s => stOf(s) === 0), E_ = L.filter(s => stOf(s) === 1);
+  h += `<h3>How the characters were perceived (Part 3, all participants)</h3><div class="scroll"><table><tr><th>Item</th><th>Alex (hard)</th><th>Noah (easy)</th><th>Test</th></tr>${QC.map((q, i) => { const a = H_.map(s => s.C[i]), b = E_.map(s => s.C[i]), r = welch(a, b); return `<tr><td>${q}</td><td>${a.length ? f(mean(a)) : '–'}</td><td>${b.length ? f(mean(b)) : '–'}</td><td${r && r.p < .05 ? ' class="ok"' : ''}>${tt(r)}</td></tr>`; }).join('')}</table></div>`;
+  h += `<h3>Chat behaviour</h3><div class="scroll"><table><tr><th>Cell</th><th>n</th><th>Cold</th><th>Neutral</th><th>Interested</th><th>Mean seconds per choice</th></tr>${[0, 1].map(st => [0, 1].map(c => { const g = L.filter(s => stOf(s) === st && s.commit === c), ch = g.flatMap(s => s.choices), t = g.flatMap(s => s.times); const pc = k => ch.length ? Math.round(100 * ch.filter(x => x === k).length / ch.length) + '%' : '–'; return `<tr><td>${ST[st]}, ${CM[c].toLowerCase()}</td><td>${g.length}</td><td>${pc(0)}</td><td>${pc(1)}</td><td>${pc(2)}</td><td>${t.length ? f(mean(t) / 1000, 1) : '–'}</td></tr>`; }).join('')).join('')}</table></div>`;
+  h += `<h3>Add participants' result codes</h3><textarea id="paste" rows="3" placeholder="One OD2: code per line (only needed if a participant could not reach the database)"></textarea><button class="ghost" id="imp" style="align-self:flex-start">Add codes</button>`;
+  d.innerHTML = h;
+  d.querySelector('#rf').onclick = dash;
+  d.querySelector('#imp').onclick = async () => {
+    const have = new Set(data.list.map(s => s.id));
+    for (const x of d.querySelector('#paste').value.split('\n').map(x => x.trim()).filter(x => x.startsWith('OD2:'))) {
+      const s = JSON.parse(decodeURIComponent(escape(atob(x.slice(4)))));
+      if (have.has(s.id)) continue; have.add(s.id);
+      if (DB_URL) await api('POST', s); else { const a = store.get(); a.push(s); store.set(a); }
+    } dash();
   };
-  w.querySelector('#csv').onclick = () => {
-    const rows = [['id', 'character', 'timestamp', 'c1', 'c2', 'c3', 'c4', 'c5', 't1_ms', 't2_ms', 't3_ms', 't4_ms', 't5_ms', 'talk_again', 'nice']];
-    all.forEach(s => rows.push([s.id, s.char, s.ts, ...s.choices.map(c => LV[c]), ...s.times, s.talkAgain, s.nice]));
-    const a = el('a'); a.href = URL.createObjectURL(new Blob([rows.map(r => r.join(',')).join('\n')], { type: 'text/csv' }));
-    a.download = 'meetcute-results.csv'; a.click();
+  d.querySelector('#csv').onclick = () => {
+    const q = x => '"' + String(x).replace(/"/g, '""') + '"', rows = [['id', 'timestamp', 'character', 'strategy', 'commitment', 'why', 'duration_s', ...PRE.map((_, i) => 'pre' + (i + 1)), ...QA.map((_, i) => 'A' + (i + 1)), ...QB.map((_, i) => 'B' + (i + 1)), ...QC.map((_, i) => 'C' + (i + 1)), ...[1, 2, 3, 4, 5].map(i => 'choice' + i), ...[1, 2, 3, 4, 5].map(i => 'time' + i + '_ms'), 'wanting_mean', 'liking_mean']];
+    L.forEach(s => rows.push([s.id, s.ts, s.char, ST[stOf(s)], CM[s.commit], q(s.why || ''), s.dur, ...s.pre, ...s.A, ...s.B, ...s.C, ...s.choices.map(c => ['cold', 'neutral', 'interested'][c]), ...s.times, f(s.want, 3), f(s.like, 3)]));
+    const a = el('a'); a.href = URL.createObjectURL(new Blob([rows.map(r => r.join(',')).join('\n')], { type: 'text/csv' })); a.download = 'meetcute-results.csv'; a.click();
   };
-  w.querySelector('#clr').onclick = () => { if (confirm('Delete all stored sessions?')) { store.set([]); dash(); } };
+  d.querySelector('#rs').onclick = async () => {
+    if (!confirm(`Permanently delete ALL ${data.list.length} stored session(s)${DB_URL ? ' from the shared database and this browser' : ''}? Download the CSV first if you need it.`)) return;
+    if (DB_URL) { const r = await api('DELETE'); if (!r.ok) throw new Error('Reset failed: server answered ' + r.status); }
+    store.set([]); dash();
+  };
 }
 
 function route() { location.hash === '#results' ? dash() : showStart(); }
