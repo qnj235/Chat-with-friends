@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>meetcute</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root{--ink:#241a35;--mute:#7b7190;--bg:#f2eff7;--card:#fff;--line:#e3dcee;--rose:#d6336c;--amber:#ff8a5c;--r:18px}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+button{font:inherit;cursor:pointer}
+.logo{font-family:Georgia,"Times New Roman",serif;font-style:italic;font-size:1.7rem;letter-spacing:-.02em;color:var(--rose)}
+.wrap{max-width:480px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;background:var(--card);box-shadow:0 0 60px rgba(60,30,100,.08)}
+.top{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.2rem;border-bottom:1px solid var(--line)}
+.pad{padding:1.4rem 1.3rem;display:flex;flex-direction:column;gap:1.1rem;flex:1}
+h1,h2{margin:0;font-family:Georgia,serif;font-weight:400;letter-spacing:-.02em}
+h1{font-size:2rem;line-height:1.15}
+.lock{position:relative;border-radius:var(--r);overflow:hidden;height:190px;background:linear-gradient(135deg,#c9b8e8,#f2b7cb 55%,#ffd2b8);display:grid;place-items:center;text-align:center}
+.lock::before{content:"";position:absolute;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.55);filter:blur(18px);top:20px}
+.lock span{position:relative;background:rgba(255,255,255,.85);padding:.4rem .9rem;border-radius:99px;font-size:.9rem;margin-top:110px}
+.rules{background:#faf8fd;border:1px solid var(--line);border-radius:var(--r);padding:1rem 1.1rem;margin:0}
+.btn{border:0;border-radius:99px;padding:.9rem 1.4rem;color:#fff;font-weight:600;background:linear-gradient(135deg,var(--rose),var(--amber))}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.ghost{background:none;border:1px solid var(--line);color:var(--ink);border-radius:99px;padding:.6rem 1.1rem}
+.small{font-size:.82rem;color:var(--mute)}
+a{color:var(--rose)}
+/* chat */
+.head{display:flex;align-items:center;gap:.7rem;padding:.7rem 1.1rem;border-bottom:1px solid var(--line);position:sticky;top:0;background:#fff;z-index:2}
+.av{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;color:#fff;font-family:Georgia,serif;font-size:1.2rem;flex:none}
+.head b{display:block;line-height:1.2}.head .on{font-size:.78rem;color:#2a9d6a}
+.dots{margin-left:auto;display:flex;gap:5px}.dots i{width:9px;height:9px;border-radius:50%;background:var(--line)}.dots i.d{background:var(--rose)}
+#log{flex:1;overflow-y:auto;padding:1rem 1.1rem;display:flex;flex-direction:column;gap:.45rem}
+.prof{border:1px solid var(--line);border-radius:var(--r);padding:1rem;margin-bottom:.6rem;background:#faf8fd}
+.prof p{margin:.4rem 0}.tags{display:flex;gap:.4rem;flex-wrap:wrap}.tags span{font-size:.78rem;border:1px solid var(--line);border-radius:99px;padding:.1rem .6rem;background:#fff}
+.chip{align-self:center;font-size:.78rem;color:var(--mute);margin:.3rem 0;text-align:center}
+.b{max-width:80%;padding:.55rem .9rem;border-radius:18px;word-wrap:break-word;animation:pop .18s ease-out}
+.b.him{align-self:flex-start;background:#f0ecf6;border-bottom-left-radius:5px}
+.b.me{align-self:flex-end;color:#fff;background:linear-gradient(135deg,var(--rose),#e8588a);border-bottom-right-radius:5px}
+.typ{align-self:flex-start;background:#f0ecf6;border-radius:18px;padding:.7rem .9rem;display:flex;gap:4px}
+.typ i{width:7px;height:7px;border-radius:50%;background:#a99fc0;animation:bl 1s infinite}.typ i:nth-child(2){animation-delay:.15s}.typ i:nth-child(3){animation-delay:.3s}
+@keyframes bl{0%,60%,100%{opacity:.3}30%{opacity:1}}@keyframes pop{from{opacity:0;transform:translateY(5px)}}
+@media(prefers-reduced-motion:reduce){.b,.typ i{animation:none}}
+#panel{border-top:1px solid var(--line);padding:.8rem 1rem 1rem;display:flex;flex-direction:column;gap:.5rem;background:#fff;min-height:60px}
+.opt{text-align:left;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:.65rem .9rem;color:var(--ink)}
+.opt:hover,.opt:focus-visible{border-color:var(--rose);background:#fff5f8;outline:none}
+.scale{display:flex;flex-wrap:wrap;gap:.3rem}
+.scale button{width:2.3rem;height:2.3rem;border-radius:50%;border:1.5px solid var(--line);background:#fff;color:var(--ink)}
+.scale button.on{background:var(--rose);border-color:var(--rose);color:#fff}
+.ends{display:flex;justify-content:space-between;font-size:.75rem;color:var(--mute)}
+/* dashboard */
+table{border-collapse:collapse;width:100%;font-size:.85rem}th,td{border-bottom:1px solid var(--line);padding:.4rem .3rem;text-align:left}
+textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:.6rem;font:.8rem monospace}
+.wide{max-width:900px}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+'use strict';
+
+/* Optional: paste a webhook / Apps Script URL here and every finished session is POSTed to it. */
+const ENDPOINT = '';
+
+const LV = ['cold', 'neutral', 'interested'];
+const CONV = [
+{ id: 'adrian', name: 'Adrian Cole', age: 22, time: '11:47 PM', grad: 'linear-gradient(135deg,#d6336c,#ff8a5c)',
+  tags: ['Cocky', 'Playful', 'Slow burn'],
+  bio: 'Effortlessly charming, annoyingly observant, and always wearing that half-smile. He rarely texts first.',
+  setting: 'Late night, after you accidentally stole his usual seat at a campus café.',
+  rounds: [
+  { him: ['So, you stole my seat today.', 'I hope the coffee was worth the crime.'],
+    opts: ["You survived. I'm sure you'll manage tomorrow, too.", "I didn't know it was your seat. There's no name tag on it.", "Wait, you actually noticed me? I thought you were too busy pretending not to look."],
+    res: ["Believe me, if I were pretending to look, you'd know. Anyway, I'll let you off this time. Try not to miss me too much tomorrow."] },
+  { him: ['By the way, you looked exhausted today.', "Don't tell me that coffee was your entire lunch."],
+    opts: ["Didn't know you were keeping track of my meals.", 'I had a busy day. Coffee was just convenient.', 'Aww, were you worried about me?'],
+    res: ["Don't flatter yourself. I just have a thing against people collapsing in public. Very inconvenient for everyone involved."] },
+  { him: ["You know what's strange?", "You're actually pretty entertaining when you're not trying to get rid of me."],
+    opts: ["Good thing I wasn't trying very hard, then.", 'Is that your way of saying you enjoy talking to me?', 'Careful, Adrian. That almost sounded like a compliment.'],
+    res: ["Almost? That's unfortunate. I'll try to disappoint you less next time."] },
+  { him: ["I'm getting coffee tomorrow.", 'There\u2019s a place near campus that makes it properly. Not that overpriced stuff you were drinking today.', 'You can come along if you want.'],
+    opts: ['I think I\u2019ll survive without your coffee recommendations.', 'Maybe. What time are you going?', 'Are you asking me out, or do you just need someone to judge your coffee taste?'],
+    res: ["Let's call it quality control. Ten in the morning. If you show up, I'll assume you have excellent taste in company."] },
+  { him: ['One last thing before I sleep.'],
+    opts: ['What now?', "Yeah? What's up?", "You could've just said goodnight, you know."],
+    res: ["I could have. But then you wouldn't have anything to look forward to tomorrow.", "Ten o'clock. Don't be late.", '...Goodnight.'] }
+  ] },
+{ id: 'ethan', name: 'Ethan Hayes', age: 23, time: '9:16 PM', grad: 'linear-gradient(135deg,#3b4a8f,#7aa2c8)',
+  tags: ['Quiet', 'Observant', 'Hard to read'],
+  bio: 'Sits by the window, listens more than he speaks, and remembers little things you mentioned once and forgot.',
+  setting: 'A rainy evening after a long day at university. You met through a mutual friend a few weeks ago.',
+  rounds: [
+  { him: ['You mentioned liking rainy days once.', 'Still true, or was that just your way of sounding interesting?'],
+    opts: ["I didn't realize you were taking notes.", 'Still true. Why do you ask?', "You remembered that? That's surprisingly cute."],
+    res: ["I remember things people say. Doesn't mean they should get too excited about it.", "It's raining pretty hard here. Thought you might appreciate the weather report."] },
+  { him: ["There's something peaceful about the city when it rains.", 'Less noise. Fewer people pretending they\u2019re not tired.'],
+    opts: ["That's a very poetic way of saying the weather is bad.", 'True. Everything feels a little slower when it rains.', 'You always think about things like this, or am I getting the special version of you?'],
+    res: ['Maybe I just think too much.', "It's a terrible habit, actually. Wouldn't recommend it."] },
+  { him: ['Can I ask you something?', 'When you\u2019re having a bad day, do you prefer someone to talk to you or leave you alone?'],
+    opts: ["Depends. Why is that your business?", 'Usually, I like having some time to myself first.', 'Depends on the person. Some people make being around them feel easier.'],
+    res: ['Fair enough. I think people underestimate how different those two things are.', 'Sometimes giving someone space is a way of caring about them, too.'] },
+  { him: ["There's a little bookstore near the river.", 'Old books, terrible lighting, coffee that\u2019s probably a health hazard.', 'I think you\u2019d like it.'],
+    opts: ['Sounds like you\u2019ve already decided what I like.', 'That sounds nice. Do you go there often?', 'Are you telling me about it, or are you trying to take me there?'],
+    res: ['I was getting to that part.', "I'm going there Saturday afternoon. You could come with me.", "No pressure, though. It's a bookstore, not a marriage proposal."] },
+  { him: ['I should probably sleep soon.', 'But there\u2019s something I wanted to say.'],
+    opts: ['This sounds suspiciously serious.', "Go ahead. I'm listening.", "You're making me curious now. Tell me."],
+    res: ["I don't usually reach out to people just because I have nothing better to do.", "So if I text you again tomorrow, don't assume I'm bored.", "Goodnight. And don't stay up too late."] }
+  ] }
+];
+
+const app = document.getElementById('app');
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined) e.textContent = text; return e; };
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const store = {
+  get() { try { return JSON.parse(localStorage.getItem('od_sessions') || '[]'); } catch (e) { return []; } },
+  set(v) { localStorage.setItem('od_sessions', JSON.stringify(v)); }
+};
+let token = 0;   // cancels a running chat if the view changes
+
+/* ---------- start ---------- */
+function showStart() {
+  token++;
+  app.innerHTML = '';
+  const w = el('div', 'wrap');
+  w.innerHTML = `<div class="top"><span class="logo">meetcute</span><span class="small">1 new match</span></div>
+  <div class="pad">
+    <div class="lock"><span>Your match is waiting</span></div>
+    <h1>Someone just messaged you.</h1>
+    <p class="rules">You will be talking to a person, you have 3 options to choose to answer this person for each round of conversation. The conversation has 5 rounds. After that, we will ask you to rate this person based on the conversation you just had</p>
+    <button class="btn" id="go">Start chatting</button>
+    <button class="ghost" id="share">Share this with a friend</button>
+    <p class="small">The people in this chat are fictional. We record which options you pick and how long each choice takes, nothing else.</p>
+    <p class="small"><a href="#results">Researcher view</a></p>
+  </div>`;
+  app.appendChild(w);
+  w.querySelector('#go').onclick = begin;
+  w.querySelector('#share').onclick = share;
+}
+async function share() {
+  const url = location.href.split('#')[0];
+  if (navigator.share) { await navigator.share({ title: 'meetcute', text: 'Try this short chat and rate your match.', url }); return; }
+  await navigator.clipboard.writeText(url);
+  alert('Link copied:\n' + url);
+}
+
+/* ---------- chat ---------- */
+async function begin() {
+  const seen = store.get().map(s => s.char);
+  let pool = CONV.filter(c => !seen.includes(c.id));
+  if (!pool.length) pool = CONV;
+  const c = pool[Math.floor(Math.random() * pool.length)];
+  const S = { id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6), char: c.id, ts: new Date().toISOString(), choices: [], times: [] };
+  const my = ++token;
+  app.innerHTML = '';
+  const w = el('div', 'wrap');
+  w.style.height = '100vh';
+  w.innerHTML = `<div class="head"><div class="av" style="background:${c.grad}">${c.name[0]}</div>
+    <div><b>${c.name}, ${c.age}</b><span class="on">online</span></div><div class="dots"></div></div>
+    <div id="log"></div><div id="panel"></div>`;
+  app.appendChild(w);
+  const log = w.querySelector('#log'), panel = w.querySelector('#panel'), dots = w.querySelector('.dots');
+  for (let i = 0; i < 5; i++) dots.appendChild(el('i'));
+  const prof = el('div', 'prof');
+  prof.innerHTML = `<b>${c.name}</b> <span class="small">${c.age}</span><p>${c.bio}</p><div class="tags">${c.tags.map(t => `<span>${t}</span>`).join('')}</div><p class="small"><i>${c.setting}</i></p>`;
+  log.appendChild(prof);
+  log.appendChild(el('div', 'chip', 'Today ' + c.time));
+  const down = () => { log.scrollTop = log.scrollHeight; };
+  const bubble = (t, who) => { log.appendChild(el('div', 'b ' + who, t)); down(); };
+  const say = async lines => {
+    for (const t of lines) {
+      const ty = el('div', 'typ'); ty.innerHTML = '<i></i><i></i><i></i>'; log.appendChild(ty); down();
+      await sleep(550 + Math.min(t.length * 16, 900));
+      ty.remove();
+      if (my !== token) return false;
+      bubble(t, 'him');
+      await sleep(250);
+    }
+    return true;
+  };
+  const ask = (round) => new Promise(res => {
+    panel.innerHTML = '';
+    const t0 = performance.now();
+    shuffle([0, 1, 2]).forEach(lv => {
+      const b = el('button', 'opt', round.opts[lv]);
+      b.onclick = () => {
+        const ms = Math.round(performance.now() - t0);
+        S.choices.push(lv); S.times.push(ms);
+        panel.innerHTML = '';
+        bubble(round.opts[lv], 'me');
+        res();
+      };
+      panel.appendChild(b);
+    });
+  });
+
+  for (let r = 0; r < 5; r++) {
+    [...dots.children].forEach((d, i) => d.className = i <= r ? 'd' : '');
+    if (!await say(c.rounds[r].him)) return;
+    await ask(c.rounds[r]);
+    await sleep(500);
+    if (!await say(c.rounds[r].res)) return;
+    await sleep(400);
+  }
+  log.appendChild(el('div', 'chip', 'The chat has finished.'));
+  down();
+  rate(panel, c, S);
+}
+
+/* ---------- rating ---------- */
+function rate(panel, c, S) {
+  panel.innerHTML = '';
+  const first = c.name.split(' ')[0];
+  const val = {};
+  const sub = el('button', 'btn', 'Submit'); sub.disabled = true;
+  const row = (key, q) => {
+    const box = el('div'); box.appendChild(el('b', '', q));
+    const sc = el('div', 'scale');
+    for (let n = 1; n <= 10; n++) {
+      const b = el('button', '', n);
+      b.onclick = () => { val[key] = n; [...sc.children].forEach(x => x.classList.toggle('on', x === b)); sub.disabled = !(val.talkAgain && val.nice); };
+      sc.appendChild(b);
+    }
+    const ends = el('div', 'ends'); ends.append(el('span', '', '1 not at all'), el('span', '', '10 definitely'));
+    box.append(sc, ends); panel.appendChild(box);
+  };
+  panel.appendChild(el('b', '', 'The chat is finished. Please rate ' + first + ' from 1 to 10.'));
+  row('talkAgain', `How much would you like to talk to ${first} again?`);
+  row('nice', `How likely is ${first} to be a nice person?`);
+  panel.appendChild(sub);
+  panel.style.maxHeight = '60vh'; panel.style.overflowY = 'auto';
+  sub.onclick = () => {
+    S.talkAgain = val.talkAgain; S.nice = val.nice;
+    const all = store.get(); all.push(S); store.set(all);
+    if (ENDPOINT) fetch(ENDPOINT, { method: 'POST', mode: 'no-cors', body: JSON.stringify(S) });
+    thanks(S);
+  };
+}
+
+function thanks(S) {
+  token++;
+  app.innerHTML = '';
+  const w = el('div', 'wrap');
+  const code = 'OD1:' + btoa(JSON.stringify(S));
+  w.innerHTML = `<div class="top"><span class="logo">meetcute</span></div>
+  <div class="pad"><h1>Thank you for participating.</h1>
+  <p>Your answers have been recorded. Know someone who would like to try it? Send them the link.</p>
+  <button class="btn" id="share">Share this with a friend</button>
+  <button class="ghost" id="copy">Copy my result code</button>
+  <p class="small">If this page is not connected to a server, the result code is how you send your answers to whoever shared it with you.</p>
+  <button class="ghost" id="again">Start over</button></div>`;
+  app.appendChild(w);
+  w.querySelector('#share').onclick = share;
+  w.querySelector('#copy').onclick = async () => { await navigator.clipboard.writeText(code); w.querySelector('#copy').textContent = 'Copied'; };
+  w.querySelector('#again').onclick = showStart;
+}
+
+/* ---------- researcher view (#results) ---------- */
+const avg = a => a.length ? (a.reduce((x, y) => x + y, 0) / a.length) : NaN;
+const f = (n, d = 1) => isNaN(n) ? '-' : n.toFixed(d);
+function dash() {
+  token++;
+  const all = store.get();
+  app.innerHTML = '';
+  const w = el('div', 'wrap wide');
+  let html = `<div class="top"><span class="logo">meetcute · results</span><a href="#">Back</a></div><div class="pad">
+  <p class="small">${all.length} session(s) stored in this browser. Paste result codes from participants below to add them.</p>`;
+  CONV.forEach(c => {
+    const L = all.filter(s => s.char === c.id);
+    const cnt = [0, 1, 2].map(l => L.reduce((n, s) => n + s.choices.filter(x => x === l).length, 0));
+    const tot = cnt[0] + cnt[1] + cnt[2];
+    const rt = [0, 1, 2, 3, 4].map(r => f(avg(L.map(s => s.times[r] / 1000).filter(x => x === x)), 1));
+    html += `<h2>${c.name}</h2><table><tr><th>Sessions</th><th>Cold</th><th>Neutral</th><th>Interested</th><th>Mean warmth (0-2)</th><th>Talk again</th><th>Nice</th></tr>
+    <tr><td>${L.length}</td>${cnt.map(n => `<td>${n} (${tot ? Math.round(100 * n / tot) : 0}%)</td>`).join('')}
+    <td>${f(tot ? (cnt[1] + 2 * cnt[2]) / tot : NaN, 2)}</td><td>${f(avg(L.map(s => s.talkAgain)))}</td><td>${f(avg(L.map(s => s.nice)))}</td></tr></table>
+    <p class="small">Mean seconds to choose, rounds 1-5: ${rt.join(' / ')}</p>`;
+  });
+  html += `<textarea id="paste" rows="3" placeholder="Paste result codes (one per line)"></textarea>
+  <div style="display:flex;gap:.5rem;flex-wrap:wrap"><button class="btn" id="imp">Add codes</button><button class="ghost" id="csv">Download CSV</button><button class="ghost" id="clr">Clear all</button></div></div>`;
+  w.innerHTML = html; app.appendChild(w);
+  w.querySelector('#imp').onclick = () => {
+    const have = new Set(all.map(s => s.id));
+    w.querySelector('#paste').value.split('\n').map(x => x.trim()).filter(x => x.startsWith('OD1:')).forEach(x => {
+      const s = JSON.parse(atob(x.slice(4)));
+      if (!have.has(s.id)) { all.push(s); have.add(s.id); }
+    });
+    store.set(all); dash();
+  };
+  w.querySelector('#csv').onclick = () => {
+    const rows = [['id', 'character', 'timestamp', 'c1', 'c2', 'c3', 'c4', 'c5', 't1_ms', 't2_ms', 't3_ms', 't4_ms', 't5_ms', 'talk_again', 'nice']];
+    all.forEach(s => rows.push([s.id, s.char, s.ts, ...s.choices.map(c => LV[c]), ...s.times, s.talkAgain, s.nice]));
+    const a = el('a'); a.href = URL.createObjectURL(new Blob([rows.map(r => r.join(',')).join('\n')], { type: 'text/csv' }));
+    a.download = 'meetcute-results.csv'; a.click();
+  };
+  w.querySelector('#clr').onclick = () => { if (confirm('Delete all stored sessions?')) { store.set([]); dash(); } };
+}
+
+function route() { location.hash === '#results' ? dash() : showStart(); }
+addEventListener('hashchange', route);
+route();
+</script>
+</body>
+</html>
